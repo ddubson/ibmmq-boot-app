@@ -1,0 +1,30 @@
+buildscript {
+    ext {
+        springVersion = "4.3.10.RELEASE"
+        springBootVersion = "1.5.6.RELEASE"
+    }
+
+    repositories { mavenCentral() }
+
+    dependencies {
+        classpath "org.springframework.boot:spring-boot-gradle-plugin:$springBootVersion"
+    }
+}
+
+apply plugin: 'java'
+apply plugin: 'org.springframework.boot'
+
+repositories {
+    jcenter()
+    flatDir {
+        dirs "lib"
+    }
+}
+
+dependencies {
+    compile name: "com.ibm.mq.allclient"
+    compile "org.springframework.boot:spring-boot-starter:$springBootVersion"
+    compile "org.springframework.integration:spring-integration-core:${springVersion}"
+    compile "org.springframework.integration:spring-integration-jms:${springVersion}"
+    compile group: 'javax.jms', name: 'jms', version: '1.1'
+}

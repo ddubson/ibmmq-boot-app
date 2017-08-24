@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:int="http://www.springframework.org/schema/integration"
+       xmlns:int-jms="http://www.springframework.org/schema/integration/jms"
+       xsi:schemaLocation="
+            http://www.springframework.org/schema/beans
+            http://www.springframework.org/schema/beans/spring-beans.xsd
+            http://www.springframework.org/schema/integration
+            http://www.springframework.org/schema/integration/spring-integration.xsd
+            http://www.springframework.org/schema/integration/jms
+            http://www.springframework.org/schema/integration/jms/spring-integration-jms.xsd">
+    <bean id="ibmMqConnFactory"
+          class="org.springframework.jms.connection.UserCredentialsConnectionFactoryAdapter">
+        <property name="targetConnectionFactory">
+            <bean class="com.ibm.mq.jms.MQQueueConnectionFactory">
+                <property name="transportType" ref="transport"/>
+                <property name="queueManager" value="${ibm.mq.jms.queueManager}"/>
+                <property name="hostName" value="${ibm.mq.jms.hostName}"/>
+                <property name="port" value="${ibm.mq.jms.port}"/>
+                <property name="channel" value="${ibm.mq.jms.channel}"/>
+            </bean>
+        </property>
+        <property name="username" value="${ibm.mq.jms.userName}"/>
+        <property name="password" value="${ibm.mq.jms.password}"/>
+    </bean>
+
+    <int-jms:outbound-channel-adapter id="outboundAdapter"
+                                      connection-factory="ibmMqConnFactory"
+                                      channel="outboundChannel"
+                                      destination="devQueue1"/>
+
+    <int-jms:inbound-channel-adapter id="inboundAdapter"
+                                     connection-factory="ibmMqConnFactory"
+                                     destination="devQueue1"
+                                     channel="inboundChannel">
+        <int:poller fixed-rate="2" time-unit="SECONDS"/>
+    </int-jms:inbound-channel-adapter>
+
+    <bean id="transport"
+          class="org.springframework.beans.factory.config.FieldRetrievingFactoryBean">
+        <property name="staticField" value="com.ibm.mq.jms.JMSC.MQJMS_TP_CLIENT_MQ_TCPIP"/>
+    </bean>
+</beans>

@@ -1,0 +1,11 @@
+logging:
+  level:
+    root: WARN
+
+ibm.mq.jms:
+  queueManager: queueManagerName
+  hostName: hostOrIp
+  port: 1414
+  channel: channelName
+  userName: userName
+  password: password
