@@ -34,7 +34,7 @@
                                      connection-factory="ibmMqConnFactory"
                                      destination="devQueue1"
                                      channel="inboundChannel">
-        <int:poller fixed-rate="2" time-unit="SECONDS"/>
+        <int:poller fixed-rate="7" time-unit="SECONDS"/>
     </int-jms:inbound-channel-adapter>
 
     <bean id="transport"
