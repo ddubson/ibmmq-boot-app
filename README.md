@@ -6,6 +6,7 @@ Export the necessary environment variables
 
 ```
 export IBM_MQ_JMS_QUEUEMANAGER=
+export IBM_MQ_JMS_QUEUENAME=
 export IBM_MQ_JMS_HOSTNAME=
 export IBM_MQ_JMS_PORT=
 export IBM_MQ_JMS_CHANNEL=

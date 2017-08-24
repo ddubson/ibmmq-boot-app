@@ -4,6 +4,7 @@ logging:
 
 ibm.mq.jms:
   queueManager: queueManagerName
+  queueName: queueName
   hostName: hostOrIp
   port: 1414
   channel: channelName

@@ -1,6 +1,7 @@
 package ibm.poc;
 
 import com.ibm.mq.jms.MQQueue;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.boot.SpringApplication;
@@ -13,13 +14,18 @@ import org.springframework.messaging.support.MessageBuilder;
 
 import javax.jms.JMSException;
 
+import static java.lang.String.format;
+
 @SpringBootApplication
 @ImportResource("integration-context.xml")
 public class Application implements ApplicationRunner{
     private final MessageGateway messageGateway;
+    private String queueName;
 
-    public Application(MessageGateway messageGateway) {
+    public Application(MessageGateway messageGateway,
+                       @Value("${ibm.mq.jms.queueName}") String queueName) {
         this.messageGateway = messageGateway;
+        this.queueName = queueName;
     }
 
     public static void main(String[] args) {
@@ -28,13 +34,13 @@ public class Application implements ApplicationRunner{
 
     @Override
     public void run(ApplicationArguments args) throws Exception {
-        System.out.println("Send one XML message to queue");
+        System.out.println(format("Send one XML message to %s queue", queueName));
         messageGateway.send(MessageBuilder.withPayload("<?xml version=\"1.0\" encoding=\"UTF-8\"?><data><entity>1</entity></data>").build());
     }
 
-    @Bean("devQueue1")
-    public MQQueue devQueue1() throws JMSException {
-        return new MQQueue("DEV.QUEUE.1");
+    @Bean
+    public MQQueue generalQueue(@Value("${ibm.mq.jms.queueName}") String queueName) throws JMSException {
+        return new MQQueue(queueName);
     }
 
     @Bean

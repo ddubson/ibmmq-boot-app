@@ -28,11 +28,11 @@
     <int-jms:outbound-channel-adapter id="outboundAdapter"
                                       connection-factory="ibmMqConnFactory"
                                       channel="outboundChannel"
-                                      destination="devQueue1"/>
+                                      destination="generalQueue"/>
 
     <int-jms:inbound-channel-adapter id="inboundAdapter"
                                      connection-factory="ibmMqConnFactory"
-                                     destination="devQueue1"
+                                     destination="generalQueue"
                                      channel="inboundChannel">
         <int:poller fixed-rate="7" time-unit="SECONDS"/>
     </int-jms:inbound-channel-adapter>
