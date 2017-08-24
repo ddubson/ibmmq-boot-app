@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:int-amqp="http://www.springframework.org/schema/integration/amqp"
+       xmlns:rabbit="http://www.springframework.org/schema/rabbit"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+            http://www.springframework.org/schema/beans/spring-beans.xsd
+            http://www.springframework.org/schema/integration/amqp
+            http://www.springframework.org/schema/integration/amqp/spring-integration-amqp.xsd
+            http://www.springframework.org/schema/rabbit
+            http://www.springframework.org/schema/rabbit/spring-rabbit.xsd">
+
+    <int-amqp:outbound-channel-adapter channel="toRabbitChannel"
+                                       amqp-template="amqpTemplate"
+                                       exchange-name="si.test.exchange"
+                                       routing-key="si.test.binding"/>
+
+    <int-amqp:inbound-channel-adapter channel="fromRabbitChannel"
+                                      queue-names="${rabbitmq.queueName}"
+                                      connection-factory="connectionFactory" />
+
+    <rabbit:connection-factory id="connectionFactory"
+                               host="${rabbitmq.hostname}"
+                               port="${rabbitmq.port}"/>
+    <rabbit:template id="amqpTemplate" connection-factory="connectionFactory"/>
+    <rabbit:admin connection-factory="connectionFactory"/>
+    <rabbit:queue name="${rabbitmq.queueName}"/>
+    <rabbit:direct-exchange name="si.test.exchange">
+        <rabbit:bindings>
+            <rabbit:binding queue="${rabbitmq.queueName}" key="si.test.binding"/>
+        </rabbit:bindings>
+    </rabbit:direct-exchange>
+</beans>

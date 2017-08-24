@@ -26,5 +26,6 @@ dependencies {
     compile "org.springframework.boot:spring-boot-starter:$springBootVersion"
     compile "org.springframework.integration:spring-integration-core:${springVersion}"
     compile "org.springframework.integration:spring-integration-jms:${springVersion}"
+    compile "org.springframework.integration:spring-integration-amqp:${springVersion}"
     compile group: 'javax.jms', name: 'jms', version: '1.1'
 }

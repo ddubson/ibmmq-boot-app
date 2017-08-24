@@ -2,6 +2,11 @@
 
 ## Pre-requisites
 
+Requirements:
+
+- IBM MQ
+- Rabbit MQ 
+
 Export the necessary environment variables
 
 ```
@@ -12,6 +17,10 @@ export IBM_MQ_JMS_PORT=
 export IBM_MQ_JMS_CHANNEL=
 export IBM_MQ_JMS_USERNAME=
 export IBM_MQ_JMS_PASSWORD=
+
+export RABBITMQ_HOSTNAME=
+export RABBITMQ_PORT=
+export RABBITMQ_QUEUENAME=
 ```
 
 ## Running

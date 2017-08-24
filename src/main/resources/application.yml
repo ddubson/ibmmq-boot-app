@@ -10,3 +10,8 @@ ibm.mq.jms:
   channel: channelName
   userName: userName
   password: password
+
+rabbitmq:
+  hostname: localhost
+  port: 5672
+  queueName: queueName

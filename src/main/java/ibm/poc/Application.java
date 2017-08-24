@@ -44,13 +44,29 @@ public class Application implements ApplicationRunner{
     }
 
     @Bean
-    @ServiceActivator(inputChannel = "inboundChannel")
+    @ServiceActivator(inputChannel = "inboundChannel", outputChannel = "toRabbitChannel")
     public XMLPrinter xmlPrinter() {
         return new XMLPrinter();
     }
 
+    @Bean
+    @ServiceActivator(inputChannel = "fromRabbitChannel")
+    public AMQPConsumer amqpConsumer() {
+        return new AMQPConsumer();
+    }
+
     @Bean("inboundChannel")
     public DirectChannel inboundChannel() {
+        return new DirectChannel();
+    }
+
+    @Bean("toRabbitChannel")
+    public DirectChannel toRabbitChannel() {
+        return new DirectChannel();
+    }
+
+    @Bean("fromRabbitChannel")
+    public DirectChannel fromRabbitChannel() {
         return new DirectChannel();
     }
 

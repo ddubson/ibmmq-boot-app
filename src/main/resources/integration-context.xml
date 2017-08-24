@@ -41,4 +41,6 @@
           class="org.springframework.beans.factory.config.FieldRetrievingFactoryBean">
         <property name="staticField" value="com.ibm.mq.jms.JMSC.MQJMS_TP_CLIENT_MQ_TCPIP"/>
     </bean>
+
+    <import resource="integration-rabbitmq-amqp.xml" />
 </beans>
