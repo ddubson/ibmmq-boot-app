@@ -1,5 +1,12 @@
 # IBM MQ Spring Boot App
 
+Example integration with IBM MQ 9 using Spring Integration with JMS. Additionally, sending data from
+MQ 9 to RabbitMQ via AMQP.
+
+Data integration layout:
+
+![techlayout](https://github.com/ddubson/ibmmq-boot-app/blob/master/assets/tech-layout.png)
+
 ## Pre-requisites
 
 Requirements:
