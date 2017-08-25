@@ -19,6 +19,12 @@
                 <property name="hostName" value="${ibm.mq.jms.hostName}"/>
                 <property name="port" value="${ibm.mq.jms.port}"/>
                 <property name="channel" value="${ibm.mq.jms.channel}"/>
+
+                <!-- Mutual TLS properties -->
+                <property name="SSLSocketFactory" ref="sslSocketFactory" />
+                <property name="SSLCipherSuite" value="${ssl.ciphersuite}" />
+                <property name="SSLFipsRequired" value="false" />
+                <!--<property name="SSLCertStores" value="ldap://some-cert-store" />-->
             </bean>
         </property>
         <property name="username" value="${ibm.mq.jms.userName}"/>

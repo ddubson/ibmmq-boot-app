@@ -21,11 +21,21 @@ repositories {
     }
 }
 
+bootRun {
+    jvmArgs = ["-Dcom.ibm.mq.cfg.useIBMCipherMappings=false"]
+}
+
 dependencies {
     compile name: "com.ibm.mq.allclient"
+    compile name: "bcprov-jdk15on-152"
+    compile name: "bcpkix-jdk15on-152"
     compile "org.springframework.boot:spring-boot-starter:$springBootVersion"
     compile "org.springframework.integration:spring-integration-core:${springVersion}"
     compile "org.springframework.integration:spring-integration-jms:${springVersion}"
     compile "org.springframework.integration:spring-integration-amqp:${springVersion}"
-    compile group: 'javax.jms', name: 'jms', version: '1.1'
+    compile "javax.jms:jms:1.1"
+}
+
+jar {
+    from configurations.compile.collect { it.isDirectory() ? it : zipTree(it) }
 }

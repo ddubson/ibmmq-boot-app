@@ -2,6 +2,9 @@ logging:
   level:
     root: WARN
 
+spring:
+  main.banner-mode: "off"
+
 ibm.mq.jms:
   queueManager: queueManagerName
   queueName: queueName
@@ -15,3 +18,10 @@ rabbitmq:
   hostname: localhost
   port: 5672
   queueName: queueName
+
+ssl:
+  ciphersuite: TLS_RSA_WITH_AES_128_CBC_SHA
+  keystore: keystorepath
+  keystore.password: keystorePassword
+  truststore: truststore
+  truststore.password: truststorePassword

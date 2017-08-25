@@ -13,12 +13,20 @@ import org.springframework.integration.channel.DirectChannel;
 import org.springframework.messaging.support.MessageBuilder;
 
 import javax.jms.JMSException;
+import javax.net.ssl.KeyManagerFactory;
+import javax.net.ssl.SSLContext;
+import javax.net.ssl.SSLSocketFactory;
+import javax.net.ssl.TrustManagerFactory;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.security.*;
+import java.security.cert.CertificateException;
 
 import static java.lang.String.format;
 
 @SpringBootApplication
 @ImportResource("integration-context.xml")
-public class Application implements ApplicationRunner{
+public class Application implements ApplicationRunner {
     private final MessageGateway messageGateway;
     private String queueName;
 
