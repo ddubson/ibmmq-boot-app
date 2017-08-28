@@ -28,6 +28,12 @@ export IBM_MQ_JMS_PASSWORD=
 export RABBITMQ_HOSTNAME=
 export RABBITMQ_PORT=
 export RABBITMQ_QUEUENAME=
+
+export SSL_CIPHERSUITE=
+export SSL_KEYSTORE=
+export SSL_KEYSTORE_PASSWORD=
+export SSL_TRUSTSTORE=
+export SSL_TRUSTSTORE_PASSWORD=
 ```
 
 ## Running
@@ -41,3 +47,11 @@ On Windows:
 ```
 gradlew.bat clean bootRun
 ```
+
+## SSL/TLS Configuration
+
+Keystore/truststore has to be in the (Java) Key Store format (i.e. `.jks` or `.ks` file format)
+
+### Turn off SSL/TLS
+
+To turn off SSL configuration, remove SSL related property options in `integration-context.xml`
